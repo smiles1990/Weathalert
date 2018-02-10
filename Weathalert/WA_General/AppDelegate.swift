@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first;
         return url!.appendingPathComponent("Profile").path
     }
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         loadProfile()
@@ -34,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(profile.profileName)
         } else {
             self.profile = WAProfile.init(profileName: "Profile")
-            print("Sup lil homie")
         }
     }
     
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        print("See Ya")
+        print("App Closing")
         saveProfile()
         
     }

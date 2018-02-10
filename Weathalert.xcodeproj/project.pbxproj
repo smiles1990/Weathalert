@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520C450B202F23A300DE15D1 /* WAForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520C450A202F23A300DE15D1 /* WAForecastCell.swift */; };
 		524190BA1FFCF2DE001F6410 /* WALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524190B91FFCF2DE001F6410 /* WALocation.swift */; };
 		524190BC1FFD0096001F6410 /* WAAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524190BB1FFD0096001F6410 /* WAAlert.swift */; };
+		5241EBF0202E68AC006C6C3F /* WALocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241EBEF202E68AC006C6C3F /* WALocationVC.swift */; };
 		52605B28201A3FCC007367BE /* WAHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52605B27201A3FCC007367BE /* WAHomeVC.swift */; };
 		52605B2E201A4734007367BE /* WALocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52605B2D201A4734007367BE /* WALocationCell.swift */; };
 		52817BF91FEAFF2600F48F0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52817BF81FEAFF2600F48F0D /* AppDelegate.swift */; };
@@ -21,8 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		520C450A202F23A300DE15D1 /* WAForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAForecastCell.swift; sourceTree = "<group>"; };
 		524190B91FFCF2DE001F6410 /* WALocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WALocation.swift; sourceTree = "<group>"; };
 		524190BB1FFD0096001F6410 /* WAAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAAlert.swift; sourceTree = "<group>"; };
+		5241EBEF202E68AC006C6C3F /* WALocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WALocationVC.swift; sourceTree = "<group>"; };
 		52605B27201A3FCC007367BE /* WAHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAHomeVC.swift; sourceTree = "<group>"; };
 		52605B2D201A4734007367BE /* WALocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WALocationCell.swift; sourceTree = "<group>"; };
 		52817BF51FEAFF2600F48F0D /* Weathalert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weathalert.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +56,7 @@
 			children = (
 				52605B27201A3FCC007367BE /* WAHomeVC.swift */,
 				52817BFA1FEAFF2600F48F0D /* WAMapView.swift */,
+				5241EBEF202E68AC006C6C3F /* WALocationVC.swift */,
 			);
 			path = WA_VCs;
 			sourceTree = "<group>";
@@ -78,6 +83,7 @@
 		52605B2C201A46FB007367BE /* WA_Cells */ = {
 			isa = PBXGroup;
 			children = (
+				520C450A202F23A300DE15D1 /* WAForecastCell.swift */,
 				52605B2D201A4734007367BE /* WALocationCell.swift */,
 			);
 			path = WA_Cells;
@@ -190,7 +196,9 @@
 				52B55F1C2004FF9B00A7E563 /* WAProfile.swift in Sources */,
 				5282B1B3202B57BC00B944F6 /* WAForecast.swift in Sources */,
 				524190BC1FFD0096001F6410 /* WAAlert.swift in Sources */,
+				5241EBF0202E68AC006C6C3F /* WALocationVC.swift in Sources */,
 				52605B2E201A4734007367BE /* WALocationCell.swift in Sources */,
+				520C450B202F23A300DE15D1 /* WAForecastCell.swift in Sources */,
 				52817BFB1FEAFF2600F48F0D /* WAMapView.swift in Sources */,
 				52817BF91FEAFF2600F48F0D /* AppDelegate.swift in Sources */,
 				52605B28201A3FCC007367BE /* WAHomeVC.swift in Sources */,

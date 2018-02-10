@@ -20,7 +20,7 @@ class WAProfile: NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
 
-        guard let locations = aDecoder.decodeObject(forKey: "Locations") as? [WALocation] else { return nil }
+        guard let locations = aDecoder.decodeObject(forKey: "Locations") as! [WALocation]? else { return nil }
 
         for loc in locations {
 
@@ -29,14 +29,14 @@ class WAProfile: NSObject, NSCoding {
         }
 
         self.init( profileName: aDecoder.decodeObject(forKey: "Name") as! String)
-        self.profileLocations = locations
+        profileLocations = locations
         print(profileLocations.count)
 
     }
 
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.profileName, forKey: "Name")
-        aCoder.encode(self.profileLocations, forKey: "Locations")
+        aCoder.encode(profileName, forKey: "Name")
+        aCoder.encode(profileLocations, forKey: "Locations")
     }
     
 }

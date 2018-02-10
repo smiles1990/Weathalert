@@ -16,8 +16,8 @@ class WAForecast: NSObject, NSCoding {
     var tempLow: Double?
     var windSpeed: Float?
     var windBearing: Int?
-    var precipIntensityMax: Int?
-    var precipProbability: Int?
+    var precipIntensityMax: Double?
+    var precipProbability: Double?
     
     init(time: Int, icon: String) {
         self.time = time
@@ -30,8 +30,8 @@ class WAForecast: NSObject, NSCoding {
         guard let tempLow = aDecoder.decodeObject(forKey: "TempLow") as? Double else { return nil }
         guard let windSpeed = aDecoder.decodeObject(forKey: "WindSpeed") as? Float else { return nil }
         guard let windBearing = aDecoder.decodeObject(forKey: "WindBearing") as? Int else { return nil }
-        guard let precipIntensityMax = aDecoder.decodeObject(forKey: "PrecipIntensity") as? Int else { return nil }
-        guard let precipProbability = aDecoder.decodeObject(forKey: "PrecipProb") as? Int else { return nil }
+        guard let precipIntensityMax = aDecoder.decodeObject(forKey: "PrecipIntensity") as? Double else { return nil }
+        guard let precipProbability = aDecoder.decodeObject(forKey: "PrecipProb") as? Double else { return nil }
         
         self.init(time: aDecoder.decodeObject(forKey: "Time") as! Int,
                   icon: aDecoder.decodeObject(forKey: "Icon") as! String)
@@ -42,7 +42,6 @@ class WAForecast: NSObject, NSCoding {
         self.windBearing = windBearing
         self.precipIntensityMax = precipIntensityMax
         self.precipProbability = precipProbability
-        
         
     }
     

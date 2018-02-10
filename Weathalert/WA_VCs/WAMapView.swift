@@ -9,10 +9,15 @@
 import UIKit
 import MapKit
 
+protocol ModalViewControllerDelegate {
+    func reloadTable()
+}
+
 class WAMapView: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
     
     var selectedLocation = CLLocationCoordinate2D()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var delegate: ModalViewControllerDelegate!
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,8 +47,10 @@ class WAMapView: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
                 let region = MKCoordinateRegionMake(coordinate, span)
                 self.mapView.setRegion(region, animated: true)
                 
+                self.searchBar.resignFirstResponder()
             }
         }
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -73,8 +80,12 @@ class WAMapView: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
             
             let newLoc = WALocation.init(locName: annot.title!!, locLong: annotCoords.longitude, locLat: annotCoords.latitude)
             
+            newLoc.getForecast()
+            
             appDelegate.profile.profileLocations.append(newLoc)
-            appDelegate.saveProfile()
+
+            delegate?.reloadTable()
+            
             dismiss(animated: true, completion: nil)
         }
     

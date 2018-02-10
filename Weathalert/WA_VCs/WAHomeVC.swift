@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ModalViewControllerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -27,6 +27,10 @@ class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         
     }
     
+    func reloadTable(){
+        collectionView.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         let items = appDelegate.profile.profileLocations.count
@@ -42,6 +46,11 @@ class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             
             cell.locNameLabel.text = appDelegate.profile.profileLocations[indexPath.item].locName
             
+            if appDelegate.profile.profileLocations[indexPath.item].forecasts != nil {
+                let iconName = appDelegate.profile.profileLocations[indexPath.item].forecasts![0].icon
+                cell.cellImage.image = UIImage(named: iconName+".png")
+            }
+            
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath) as! WALocationCell
         }
@@ -52,14 +61,22 @@ class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         
     }
     
+    
+    
+    
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.item == appDelegate.profile.profileLocations.count {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let secondViewController = storyboard.instantiateViewController(withIdentifier: "MapView") as! WAMapView
+            secondViewController.delegate = self
             self.present(secondViewController, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "LocDetailSegue", sender: self)
         }
-        
         collectionView.reloadData()
     }
     
