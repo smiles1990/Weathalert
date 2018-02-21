@@ -8,13 +8,18 @@
 
 import UIKit
 
-
+/// CREDITS TO BE MADE TO:
+///     DarkSky
+///     Icons made by Those Icons from www.flaticon.com
+///
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var profile: WAProfile!
+    var currLocNum: Int!
+    var currAlertNum: Int!
     
     var filePath: String {
         let manager = FileManager.default;
@@ -30,18 +35,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loadProfile(){
-        if let unarchivedProfile = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? WAProfile {
-            self.profile = unarchivedProfile
-            print(profile.profileName)
-        } else {
-            self.profile = WAProfile.init(profileName: "Profile")
+        guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data else {
+            self.profile = WAProfile(profileName: "Profile", profileLocations: [WALocation]())
+            return
         }
+        
+        do {
+            let profile = try PropertyListDecoder().decode(WAProfile.self, from: data)
+            self.profile = profile
+            print("Profile loaded successfully.")
+        } catch {
+            self.profile = WAProfile(profileName: "Profile", profileLocations: [WALocation]())
+            print("Error loading Profile.")
+        }
+    
     }
     
     func saveProfile(){
         
-        NSKeyedArchiver.archiveRootObject(self.profile, toFile: filePath)
-        print("Saved")
+        do {
+            let data = try PropertyListEncoder().encode(profile)
+            let success = NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
+            print(success ? "Successful save." : "Save failed.")
+        } catch {
+            print ("Save failed.")
+        }
+        
+    }
+    
+    func getWeekday(timestamp: Double) -> String {
+        
+        let dayNum = Calendar.current.component(.weekday, from: Date(timeIntervalSince1970: timestamp))
+        let daysArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        let weekday = daysArray[dayNum-1]
+        return weekday
         
     }
 

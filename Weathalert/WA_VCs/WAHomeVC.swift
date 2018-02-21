@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ModalViewControllerDelegate {
+class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MapViewControllerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,6 +25,10 @@ class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         
         collectionView.reloadData()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        collectionView.reloadData()
     }
     
     func reloadTable(){
@@ -62,22 +66,27 @@ class WAHomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     
-    
-    
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.item == appDelegate.profile.profileLocations.count {
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let secondViewController = storyboard.instantiateViewController(withIdentifier: "MapView") as! WAMapView
             secondViewController.delegate = self
             self.present(secondViewController, animated: true, completion: nil)
+            
         } else {
+        
+            appDelegate.currLocNum = indexPath.item
             performSegue(withIdentifier: "LocDetailSegue", sender: self)
+            
         }
         collectionView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let locationVC = segue.destination as! WALocationVC
+        locationVC.currentLoc = appDelegate.profile.profileLocations[appDelegate.currLocNum]
     }
     
 }

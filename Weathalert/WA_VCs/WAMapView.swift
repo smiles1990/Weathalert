@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-protocol ModalViewControllerDelegate {
+protocol MapViewControllerDelegate {
     func reloadTable()
 }
 
@@ -17,7 +17,7 @@ class WAMapView: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
     
     var selectedLocation = CLLocationCoordinate2D()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var delegate: ModalViewControllerDelegate!
+    var delegate: MapViewControllerDelegate!
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!

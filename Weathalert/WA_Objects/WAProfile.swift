@@ -9,34 +9,14 @@
 import Foundation
 import UIKit
 
-class WAProfile: NSObject, NSCoding {
+class WAProfile: NSObject, Codable {
     
     var profileName: String!
     var profileLocations = [WALocation]()
     
-    init(profileName: String) {
+    init(profileName: String, profileLocations: [WALocation]) {
         self.profileName = profileName
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-
-        guard let locations = aDecoder.decodeObject(forKey: "Locations") as! [WALocation]? else { return nil }
-
-        for loc in locations {
-
-            print(loc.locName)
-
-        }
-
-        self.init( profileName: aDecoder.decodeObject(forKey: "Name") as! String)
-        profileLocations = locations
-        print(profileLocations.count)
-
-    }
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(profileName, forKey: "Name")
-        aCoder.encode(profileLocations, forKey: "Locations")
+        self.profileLocations = profileLocations
     }
     
 }

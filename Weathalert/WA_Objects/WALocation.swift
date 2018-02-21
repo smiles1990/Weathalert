@@ -17,10 +17,10 @@ struct DarkSkyForecastJSON: Codable {
     struct week: Codable {
         
         var data: [day]
-        
+    
         struct day: Codable {
             
-            var time: Int
+            var time: Double
             var icon: String
             var temperatureHigh: Double
             var temperatureLow: Double
@@ -33,7 +33,7 @@ struct DarkSkyForecastJSON: Codable {
     }
 }
 
-class WALocation: NSObject, NSCoding {
+class WALocation: NSObject, Codable {
     
     var locName: String
     var locLong: Double
@@ -42,35 +42,12 @@ class WALocation: NSObject, NSCoding {
     var forecasts: [WAForecast]?
     
     init(locName: String, locLong: Double, locLat: Double){
+        
         self.locName = locName
         self.locLong = locLong
         self.locLat = locLat
+        
     }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        
-        guard let alerts = aDecoder.decodeObject(forKey: "Alerts") as? [WAAlert] else { return nil }
-        guard let forecasts = aDecoder.decodeObject(forKey: "Forecasts") as? [WAForecast] else { return nil }
-        
-        self.init(locName: aDecoder.decodeObject(forKey: "Name") as! String,
-                    locLong: aDecoder.decodeObject(forKey: "Long") as! Double,
-                    locLat: aDecoder.decodeObject(forKey: "Lat") as! Double)
-        
-        self.alerts = alerts
-        self.forecasts = forecasts
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.locName, forKey: "Name")
-        aCoder.encode(self.locLong, forKey: "Long")
-        aCoder.encode(self.locLat, forKey: "Lat")
-        
-        aCoder.encode(self.alerts, forKey: "Alerts")
-        aCoder.encode(self.forecasts, forKey: "Forecasts")
-    }
-    
-    
-    
     
     func getForecast(){
         
